@@ -1,0 +1,483 @@
+---
+title: "CODE"
+---
+
+About code for the project
+
+```{r}
+# Set CRAN mirror
+options(repos = c(CRAN = "https://cloud.r-project.org"))
+```
+
+```{r}
+#1
+install.packages("tmap")
+# Load necessary libraries
+library(dplyr)
+library(sf)
+library(tmap)
+
+# Step 1: Load NYC Borough Shapefile
+shapefile_path <- "/Users/sandhyakanduri/Desktop/semester 1/ STAT515/final project stat/Borough Boundaries/geo_export_f2f491f7-6347-4598-ad2d-bb86e06c477c.shp"
+nyc_boroughs <- st_read(shapefile_path)
+
+# Step 2: Load Arrest Data
+file_path <- "/Users/sandhyakanduri/Desktop/semester 1/ STAT515/final project stat/Cleaned_NYPD_Arrest_Data_With_Standardized_Date.csv"
+data <- read.csv(file_path)
+
+# Step 3: Map Borough Codes to Full Names
+borough_mapping <- c(
+  "Q" = "Queens",
+  "B" = "Bronx",
+  "S" = "Staten Island",
+  "M" = "Manhattan",
+  "K" = "Brooklyn"
+)
+data <- data %>%
+  mutate(ARREST_BORO_NAME = borough_mapping[ARREST_BORO])
+
+# Step 4: Aggregate Arrest Counts by Borough
+borough_counts <- data %>%
+  group_by(ARREST_BORO_NAME) %>%
+  summarise(Arrest_Count = n())
+
+# Step 5: Prepare Shapefile for Merge
+nyc_boroughs <- nyc_boroughs %>%
+  mutate(borough = trimws(boro_name))
+
+# Step 6: Merge Arrest Data with Shapefile
+nyc_boroughs <- nyc_boroughs %>%
+  left_join(borough_counts, by = c("borough" = "ARREST_BORO_NAME"))
+
+# Step 7: Create Choropleth Map with Borough Names
+tm_shape(nyc_boroughs) +
+  tm_polygons(
+    col = "Arrest_Count",
+    palette = "Blues",
+    title = "Arrest Counts",
+    style = "quantile"
+  ) +
+  tm_text(
+    "borough",  # Display borough names
+    size = 0.8,  # Adjust text size
+    col = "black"  # Text color
+  ) +
+  tm_layout(
+    title = "NYC Arrests by Borough",
+    legend.outside = TRUE
+  )
+```
+
+```{r}
+#2 
+# Install necessary packages
+install.packages("leaflet")
+install.packages("leaflet.extras")
+install.packages("dplyr")
+if (!require("ggmap")) install.packages("ggmap")
+if (!require("caret")) install.packages("caret")
+
+# Load libraries
+library(leaflet)
+library(leaflet.extras)
+library(dplyr)
+library(ggplot2)
+library(plotly)
+library(maps)
+library(ggmap)
+library(caret)
+library(nnet)
+library(randomForest)
+
+arrests_data <- read.csv("/Users/sandhyakanduri/Desktop/semester 1/ STAT515/final project stat/Cleaned_NYPD_Arrest_Data_With_Standardized_Date.csv")
+
+arrests_data <- arrests_data %>% filter(!is.na(Latitude) & !is.na(Longitude))
+
+## Ensure latitude and longitude are numeric
+arrests_data$latitude <- as.numeric(arrests_data$Latitude)
+arrests_data$longitude <- as.numeric(arrests_data$Longitude)
+
+# You can calculate the intensity based on offense type count per location
+# Group by latitude, longitude, and offense_type to calculate the intensity
+arrests_data_grouped <- arrests_data %>%
+  group_by(Latitude, Longitude, OFNS_DESC) %>%
+  summarise(intensity = n(), .groups = 'drop') %>%
+  ungroup()
+```
+
+```{r}
+#1st map code
+# Ensure intensity is numeric
+arrests_data_grouped$intensity <- as.numeric(arrests_data_grouped$intensity)
+
+leaflet(data = arrests_data) %>%
+  addTiles() %>%
+  addCircleMarkers(
+    lng = ~Longitude, lat = ~Latitude,
+    radius = 5,  # Adjust the size of markers
+    color = ~case_when(
+      LAW_CAT_CD == "F" ~ "red",     # Felonies as red
+      LAW_CAT_CD == "M" ~ "blue",    # Misdemeanors as blue
+      LAW_CAT_CD == "V" ~ "green",   # Violations as green
+      TRUE ~ "gray"                  # Default color for other categories
+    ),
+    popup = ~paste(
+      "<b>Offense:</b>", OFNS_DESC, "<br>",
+      "<b>Arrest Date:</b>", ARREST_DATE, "<br>",
+      "<b>Borough:</b>", ARREST_BORO, "<br>",
+      "<b>Category:</b>", LAW_CAT_CD
+    ),
+    clusterOptions = markerClusterOptions()  # Enable marker clustering
+  ) %>%
+  addLegend(
+    position = "bottomright",
+    colors = c("red", "blue", "green"),
+    labels = c("Felony", "Misdemeanor", "Violation"),
+    title = "Offense Categories"
+  )
+```
+
+```{r}
+#2nd map code
+# Group data by offense type
+offense_counts <- arrests_data %>%
+  group_by(OFNS_DESC) %>%
+  summarise(Arrests = n(), .groups = 'drop') %>%
+  arrange(desc(Arrests))
+
+# Filter to get the top 10 offenses by number of arrests
+top_10_offenses <- offense_counts %>%
+  top_n(10, Arrests) %>%
+  arrange(desc(Arrests))
+
+# Interactive bar chart using plotly for top 10 offenses
+plot_ly(
+  top_10_offenses,
+  x = ~reorder(OFNS_DESC, -Arrests),  # Sort offenses by count
+  y = ~Arrests,
+  type = 'bar',
+  text = ~Arrests,
+  textposition = 'auto',
+  marker = list(color = 'skyblue')
+) %>%
+  layout(
+    title = "Top 10 Offenses by Number of Arrests",
+    xaxis = list(title = "Offense Type", tickangle = -45),
+    yaxis = list(title = "Number of Arrests"),
+    margin = list(b = 100)  # Add margin for x-axis labels
+  )
+```
+
+```{r}
+# Filter relevant columns
+model_data <- arrests_data %>%
+  select(LAW_CAT_CD, Latitude, Longitude, OFNS_DESC, ARREST_BORO, AGE_GROUP, PERP_SEX, PERP_RACE) %>%
+  filter(!is.na(LAW_CAT_CD))
+
+# Convert necessary columns to factors
+model_data <- model_data %>%
+  mutate(
+    LAW_CAT_CD = as.factor(LAW_CAT_CD),
+    ARREST_BORO = as.factor(ARREST_BORO),
+    AGE_GROUP = as.factor(AGE_GROUP),
+    PERP_SEX = as.factor(PERP_SEX),
+    PERP_RACE = as.factor(PERP_RACE)
+  )
+
+
+# Split data into training and testing sets
+set.seed(123)
+train_index <- createDataPartition(model_data$LAW_CAT_CD, p = 0.7, list = FALSE)
+train_data <- model_data[train_index, ]
+test_data <- model_data[-train_index, ]
+
+
+
+
+#RANDOM FOREST
+# Filter out rows with problematic target levels
+train_data <- train_data %>%
+  filter(LAW_CAT_CD != "" & LAW_CAT_CD != "(null)")
+
+test_data <- test_data %>%
+  filter(LAW_CAT_CD != "" & LAW_CAT_CD != "(null)")
+
+# Drop unused levels
+train_data$LAW_CAT_CD <- droplevels(train_data$LAW_CAT_CD)
+test_data$LAW_CAT_CD <- droplevels(test_data$LAW_CAT_CD)
+
+# Align levels
+test_data$LAW_CAT_CD <- factor(test_data$LAW_CAT_CD, levels = levels(train_data$LAW_CAT_CD))
+
+# Train Random Forest model
+set.seed(123)  # For reproducibility
+rf_model <- randomForest(LAW_CAT_CD ~ ., data = train_data, ntree = 100, importance = TRUE)
+
+# Predict on the test data
+rf_preds <- predict(rf_model, newdata = test_data)
+
+# Calculate accuracy
+rf_accuracy <- mean(rf_preds == test_data$LAW_CAT_CD)
+cat("Random Forest Accuracy:", round(rf_accuracy * 100, 2), "%\n")
+```
+
+```{r}
+# Visualize Feature Importance
+varImpPlot(
+  rf_model, 
+  main = "Feature Importance from Random Forest",
+  col = "steelblue"
+)
+```
+
+```{r}
+# Train Logistic Regression model
+log_model <- multinom(LAW_CAT_CD ~ ., data = train_data)
+
+# Predict on test data
+log_preds <- predict(log_model, newdata = test_data)
+
+# Calculate accuracy
+log_accuracy <- mean(log_preds == test_data$LAW_CAT_CD)
+cat("Logistic Regression Accuracy:", round(log_accuracy * 100, 2), "%\n")
+
+
+
+# Combine model results into a data frame
+model_comparison <- data.frame(
+  Model = c("Random Forest", "Logistic Regression"),
+  Accuracy = c(rf_accuracy, log_accuracy)
+)
+```
+
+```{r}
+# Visualize the accuracies
+ggplot(model_comparison, aes(x = Model, y = Accuracy, fill = Model)) +
+  geom_bar(stat = "identity", color = "black", width = 0.6) +
+  scale_y_continuous(labels = scales::percent_format(accuracy = 1)) +
+  labs(
+    title = "Model Accuracy Comparison",
+    x = "Model",
+    y = "Accuracy"
+  ) +
+  theme_minimal() +
+  theme(
+    plot.title = element_text(hjust = 0.5, size = 16, face = "bold"),
+    legend.position = "none"
+  )
+```
+
+```{r}
+# Group the data by borough, offense type, and legal category to count arrests
+arrests_summary <- arrests_data %>%
+  group_by(ARREST_BORO, OFNS_DESC, LAW_CAT_CD) %>%
+  summarise(Arrest_Count = n(), .groups = 'drop')
+
+# Sort the data to find the highest counts by borough and offense type
+top_arrests <- arrests_summary %>%
+  arrange(desc(Arrest_Count)) %>%
+  head(20)
+
+# Display the top results
+cat("Top Arrest Concentrations by Borough and Offense Type in NYC:\n")
+print(top_arrests)
+
+# Visualize the data: Extract the top 10 offenses by arrest count
+top_10 <- top_arrests %>% head(10)
+```
+
+```{r}
+plot <- plot_ly(
+  data = top_10,
+  x = ~Arrest_Count,
+  y = ~reorder(OFNS_DESC, Arrest_Count),  # Reorder offenses by count
+  type = 'bar',
+  orientation = 'h',  # Horizontal bar chart
+  color = ~ARREST_BORO,  # Color by borough
+  colors = "Set2",  # Use a color palette
+  text = ~paste(
+    "<b>Borough:</b>", ARREST_BORO, "<br>",
+    "<b>Category:</b>", LAW_CAT_CD, "<br>",
+    "<b>Offense:</b>", OFNS_DESC, "<br>",
+    "<b>Number of Arrests:</b>", Arrest_Count
+  ),
+  hoverinfo = "text"  # Display the text on hover
+)
+
+# Apply layout with improved labeling
+plot <- plotly::layout(
+  plot,
+  title = list(
+    text = "Top 10 Arrest Offense Types in NYC",
+    font = list(size = 18)  # Adjust title font size
+  ),
+  xaxis = list(
+    title = list(
+      text = "Number of Arrests",  # x-axis title
+      font = list(size = 14)  # Font size for x-axis title
+    ),
+    tickfont = list(size = 12),  # Font size for x-axis ticks
+    zeroline = TRUE
+  ),
+  yaxis = list(
+    title = list(
+      text = "Offense Type",  # y-axis title
+      font = list(size = 14)  # Font size for y-axis title
+    ),
+    tickfont = list(size = 12),  # Font size for y-axis ticks
+    zeroline = TRUE
+  ),
+  legend = list(
+    title = list(
+      text = "Borough",  # Legend title
+      font = list(size = 14)  # Font size for legend title
+    ),
+    font = list(size = 12)  # Font size for legend items
+  )
+)
+
+# Render the plot
+plot
+```
+
+```{r}
+# Load necessary libraries
+library(dplyr)
+library(caret)
+library(ggplot2)
+library(plotly)
+library(MASS)
+
+# Load your dataset
+NYPD <- read.csv("/Users/sandhyakanduri/Desktop/semester 1/ STAT515/final project stat/Cleaned_NYPD_Arrest_Data_With_Standardized_Date.csv")
+
+# Inspect the column names and first few rows to understand the structure
+colnames(NYPD)
+head(NYPD)
+# Check the distribution of offense types
+table(NYPD$OFNS_DESC)
+
+# Create a binary target variable for "ASSAULT 3 & RELATED OFFENSES"
+NYPD <- NYPD %>%
+  mutate(
+    OFFENSE_BINARY = ifelse(OFNS_DESC == "ASSAULT 3 & RELATED OFFENSES", 1, 0),
+    AGE_GROUP = factor(AGE_GROUP, levels = c("<18", "18-24", "25-34", "35-44", "45-54", "55+")),
+    PERP_RACE = factor(PERP_RACE),
+    PERP_SEX = factor(PERP_SEX)
+  )
+
+# Check the distribution of the binary target variable
+table(NYPD$OFFENSE_BINARY)
+
+# Step 1: Split the data into training and test sets
+set.seed(42)  # For reproducibility
+trainIndex <- createDataPartition(NYPD$OFFENSE_BINARY, p = 0.7, list = FALSE)
+train_data <- NYPD[trainIndex, ]
+test_data <- NYPD[-trainIndex, ]
+
+# Step 2: Train a logistic regression model
+model <- glm(OFFENSE_BINARY ~ AGE_GROUP + PERP_RACE + PERP_SEX, 
+             data = train_data, 
+             family = "binomial")
+
+# Summary of the logistic regression model
+summary(model)
+
+
+# Step 3: Predict probabilities on the test set
+test_data$predictions <- predict(model, newdata = test_data, type = "response")
+
+
+# Load your dataset
+NYPD <- read.csv("/Users/sandhyakanduri/Desktop/semester 1/ STAT515/final project stat/Cleaned_NYPD_Arrest_Data_With_Standardized_Date.csv")
+
+# Load necessary libraries
+library(dplyr)
+library(ggplot2)
+library(sf)
+library(ggmap)
+library(leaflet)
+
+# Convert to sf object for spatial operations (ensure coordinates are in WGS84)
+NYPD_sf <- st_as_sf(NYPD, coords = c("Longitude", "Latitude"), crs = 4326)
+
+# Load necessary libraries
+library(ggplot2)
+library(dplyr)
+library(plotly)
+
+# Example dataset preparation: Group by age, offense type, race, and gender
+aggregated_data <- NYPD %>%
+  group_by(AGE_GROUP, OFNS_DESC, PERP_RACE, PERP_SEX) %>%
+  summarise(Arrest_Count = n(), .groups = "drop")
+
+# Define age groups explicitly
+aggregated_data <- aggregated_data %>%
+  mutate(
+    Age_Group = case_when(
+      AGE_GROUP %in% c("<18") ~ "<18",
+      AGE_GROUP %in% c("18-24") ~ "18-24",
+      AGE_GROUP %in% c("25-34") ~ "25-34",
+      AGE_GROUP %in% c("35-44") ~ "35-44",
+      AGE_GROUP %in% c("45-54") ~ "45-54",
+      TRUE ~ "55+"
+    )
+  )
+
+# Filter for the top 5 offense types for clarity
+top_offenses <- aggregated_data %>%
+  group_by(OFNS_DESC) %>%
+  summarise(Total_Arrests = sum(Arrest_Count)) %>%
+  arrange(desc(Total_Arrests)) %>%
+  slice(1:5) %>%
+  pull(OFNS_DESC)
+
+filtered_data <- aggregated_data %>%
+  filter(OFNS_DESC %in% top_offenses)
+
+# Check unique PERP_RACE categories to ensure color mapping matches
+unique(filtered_data$PERP_RACE)
+
+# Static ggplot with corrected color mapping
+static_plot <- ggplot(filtered_data, aes(x = Age_Group, y = Arrest_Count, color = PERP_RACE, group = PERP_RACE)) +
+  geom_line(size = 1) +
+  geom_point(size = 2) +
+  facet_grid(PERP_SEX ~ OFNS_DESC, scales = "free_y") +
+  labs(
+    title = "Rate of Arrests per 1,000 Individuals by Age Group, Race, Gender, and Offense Type",
+    x = "Age Group",
+    y = "Arrest Count",
+    color = "Race/Ethnicity"
+  ) +
+  scale_color_manual(
+    values = c(
+      "BLACK" = "green",
+      "WHITE" = "red",
+      "BLACK HISPANIC" = "yellow",
+      "ASIAN / PACIFIC ISLANDER" = "purple",
+      "AMERICAN INDIAN/ALASKAN NATIVE" = "blue",
+      "WHITE HISPANIC" = "orange",
+      "UNKNOWN" = "gray"
+    )
+  ) +
+  theme_minimal(base_size = 14) +
+  theme(
+    strip.text = element_text(size = 12, face = "bold"),
+    axis.text.x = element_text(angle = 45, hjust = 1),
+    legend.position = "bottom"
+  ) +
+  annotate(
+    "text",
+    x = 3, y = max(filtered_data$Arrest_Count, na.rm = TRUE),
+    label = "Peak Arrest Rate",
+    color = "orange",
+    size = 4,
+    fontface = "bold"
+  )
+
+# Convert ggplot to Plotly for interactivity
+interactive_plot <- ggplotly(static_plot)
+
+# Display the interactive Plotly visualization
+interactive_plot
+```
