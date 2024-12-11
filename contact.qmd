@@ -1,0 +1,17 @@
+---
+title: "Contact"
+---
+
+**hello!! know our amazing team members**
+
+## Harshitha Singannagari
+
+Hey there!! I am Harshitha Singannagari, a dedicated and passionate data enthusiast, currently pursuing my Master’s in Data Analytical Engineering at George Mason University. With a strong academic foundation in data science, statistics, operations research, and computer science, I am committed to leveraging my analytical and technical skills to solve complex, real-world challenges.
+
+## Sandhya Kanduri
+
+hello!! i am Sandhya Kanduri, a curious mind with a flair for data and storytelling, I am a graduate student in Data Analytics Engineering who thrives at the intersection of technology and creativity. My journey, rooted in computer science and enriched through diverse internships. Whether it's building machine learning models, creating insightful visualizations, or orchestrating team efforts, I bring energy, precision, and a touch of artistry to everything I do. And when I’m not immersed in data, you’ll find me dancing to rhythms or tuning into melodies that fuel my passion for life.
+
+## Akshitha konduru
+
+hi !! i am Akshitha, a graduate student at GMU. my strong computer science skills makes me standout form a crowd. My expertise spans machine learning, data analysis, and visualization, and you have a track record of leading impactful projects and assignments.

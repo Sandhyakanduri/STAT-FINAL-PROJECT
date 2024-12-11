@@ -1,0 +1,899 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.4.555">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>STAT Final Project</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="styles.css">
+</head>
+
+<body class="floating nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="./index.html">
+    <span class="navbar-title">STAT Final Project</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link active" href="./index.html" aria-current="page"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./about.html"> 
+<span class="menu-text">Code</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./contact.html"> 
+<span class="menu-text">Contact</span></a>
+  </li>  
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/your-repo-name"> <i class="bi bi-github" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+          <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#analysis-of-nypd-arrest-patterns" id="toc-analysis-of-nypd-arrest-patterns" class="nav-link active" data-scroll-target="#analysis-of-nypd-arrest-patterns">ANALYSIS OF NYPD ARREST PATTERNS</a></li>
+  <li><a href="#team-members" id="toc-team-members" class="nav-link" data-scroll-target="#team-members">Team Members</a></li>
+  <li><a href="#abstract" id="toc-abstract" class="nav-link" data-scroll-target="#abstract">Abstract</a></li>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link" data-scroll-target="#introduction">Introduction</a></li>
+  <li><a href="#about-dataset" id="toc-about-dataset" class="nav-link" data-scroll-target="#about-dataset">About Dataset</a></li>
+  <li><a href="#data-pre-processing" id="toc-data-pre-processing" class="nav-link" data-scroll-target="#data-pre-processing">Data Pre-Processing</a></li>
+  <li><a href="#research-questions" id="toc-research-questions" class="nav-link" data-scroll-target="#research-questions">Research Questions</a></li>
+  <li><a href="#spatial-patterns-of-arrests-across-the-boroughs-of-new-york-city" id="toc-spatial-patterns-of-arrests-across-the-boroughs-of-new-york-city" class="nav-link" data-scroll-target="#spatial-patterns-of-arrests-across-the-boroughs-of-new-york-city">Spatial Patterns of arrests across the boroughs of New York City</a></li>
+  <li><a href="#highest-concentrations-of-arrests-in-nyc-and-variation-by-offense-type" id="toc-highest-concentrations-of-arrests-in-nyc-and-variation-by-offense-type" class="nav-link" data-scroll-target="#highest-concentrations-of-arrests-in-nyc-and-variation-by-offense-type">Highest Concentrations of Arrests in NYC and Variation by Offense Type</a></li>
+  <li><a href="#demographic-trends-in-arrests-by-offense-type" id="toc-demographic-trends-in-arrests-by-offense-type" class="nav-link" data-scroll-target="#demographic-trends-in-arrests-by-offense-type">Demographic Trends in Arrests by Offense Type</a></li>
+  <li><a href="#limitations" id="toc-limitations" class="nav-link" data-scroll-target="#limitations">Limitations</a></li>
+  <li><a href="#key-findings" id="toc-key-findings" class="nav-link" data-scroll-target="#key-findings">Key Findings</a></li>
+  <li><a href="#how-this-project-and-visualization-can-help-the-nypd" id="toc-how-this-project-and-visualization-can-help-the-nypd" class="nav-link" data-scroll-target="#how-this-project-and-visualization-can-help-the-nypd">How This Project and Visualization Can Help the NYPD</a></li>
+  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
+  </ul>
+</nav>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">STAT Final Project</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p><strong>Group Number</strong>: 13</p>
+<section id="analysis-of-nypd-arrest-patterns" class="level3">
+<h3 class="anchored" data-anchor-id="analysis-of-nypd-arrest-patterns">ANALYSIS OF NYPD ARREST PATTERNS</h3>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="WhatsApp Image 2024-12-10 at 7.23.39 PM.jpeg" class="img-fluid figure-img"></p>
+<figcaption>Project Name</figcaption>
+</figure>
+</div>
+</section>
+<section id="team-members" class="level2">
+<h2 class="anchored" data-anchor-id="team-members">Team Members</h2>
+<ul>
+<li>Harshitha Singannagari</li>
+<li>Devi Kondru</li>
+<li>Sandhya Kanduri</li>
+</ul>
+</section>
+<section id="abstract" class="level2">
+<h2 class="anchored" data-anchor-id="abstract">Abstract</h2>
+<p>An essential component of comprehending trends in law enforcement and public safety is the analysis of arrest statistics. In order to identify trends, inequalities, and other information on arrest activity in New York City, this project looks at the NYPD Arrest Data for the current year.The dataset was ready for further analysis by using data pre-treatment techniques such standardizing date formats, eliminating duplicates, and cleansing null values. Patterns, discrepancies, and hotspots in arrest data were found using statistical and geospatial methodologies. The findings emphasize demographic differences in arrests, shed light on law enforcement tactics in various boroughs, and point out crucial areas for legislative changes. These results are intended to support community stakeholders, law enforcement, and legislators in promoting a more fair and knowledgeable approach to public safety in NewYork City.</p>
+</section>
+<section id="introduction" class="level2">
+<h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
+<p>One of the most important foundations of urban administration is public safety and law enforcement, which have a direct impact on the standard of living in urban areas. The dynamic social milieu and diverse population of New York City make it an important case study for law enforcement data analysis. Numerous data, including the type of offenses committed, the demographics of those involved, and the locations of arrests, are included in the NYPD Arrest Data, which offers a wealth of information reflecting the city’s law enforcement activity for a given timeperiod.</p>
+<p>In order to give a thorough grasp of arrest patterns and trends in New York City, this project will examine the NYPD Arrest Data for the current year. The collection contains a wealth of data that, with careful analysis, can reveal the efficacy of law enforcement tactics, draw attention to inequities in policing methods, and pinpoint possible locations where public safety initiatives could be strengthened.</p>
+<p>This study aims to identify trends and patterns that are essential for evidence-based decision-making in public policy and law enforcement by utilizing data analytics approaches.The project’s conclusions are intended to add to the continuing discussion about justice, equity, and policing methods in urban settings. By offering concise and useful observations, this study provides a basis for knowledgeable conversations among policymakers, law enforcement,and the public.</p>
+</section>
+<section id="about-dataset" class="level2">
+<h2 class="anchored" data-anchor-id="about-dataset">About Dataset</h2>
+<p>The dataset for this project was obtained from <a href="https://www.data.gov/">Data.gov</a>, a platform providing public access to high-value, machine-readable datasets generated by the Federal Government. The dataset contains information about NYPD arrest activities, capturing various attributes such as arrest date, offense type, age group, gender, and borough of occurrence.</p>
+<p>The Dataset contains 195448 rows and 19 columns.</p>
+<p>For the current year, the dataset includes thousands of rows, each representing an individual arrest.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 17%">
+<col style="width: 17%">
+<col style="width: 17%">
+<col style="width: 17%">
+<col style="width: 29%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Row Number</th>
+<th>Column Name</th>
+<th>Data Type</th>
+<th>Measurement Unit</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>ARREST_KEY</td>
+<td>Integer</td>
+<td>NA</td>
+<td>Unique identifier for each arrest.</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>ARREST_DATE</td>
+<td>Date</td>
+<td>NA</td>
+<td>The date on which the arrest occurred.</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>PD_CD</td>
+<td>Integer</td>
+<td>NA</td>
+<td>Police department code for the offense.</td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td>PD_DESC</td>
+<td>String</td>
+<td>NA</td>
+<td>Description of the offense based on the PD code.</td>
+</tr>
+<tr class="odd">
+<td>5</td>
+<td>KY_CD</td>
+<td>Integer</td>
+<td>NA</td>
+<td>Key code representing a specific law violation.</td>
+</tr>
+<tr class="even">
+<td>6</td>
+<td>OFNS_DESC</td>
+<td>String</td>
+<td>NA</td>
+<td>Detailed description of the offense (e.g., Assault, Larceny).</td>
+</tr>
+<tr class="odd">
+<td>7</td>
+<td>LAW_CODE</td>
+<td>String</td>
+<td>NA</td>
+<td>The specific code of the law violated.</td>
+</tr>
+<tr class="even">
+<td>8</td>
+<td>LAW_CAT_CD</td>
+<td>String</td>
+<td>NA</td>
+<td>Category of the law (e.g., Felony, Misdemeanor, Violation).</td>
+</tr>
+<tr class="odd">
+<td>9</td>
+<td>ARREST_BORO</td>
+<td>String</td>
+<td>NA</td>
+<td>The borough where the arrest occurred (e.g., Manhattan, Brooklyn).</td>
+</tr>
+<tr class="even">
+<td>10</td>
+<td>ARREST_PRECINCT</td>
+<td>Integer</td>
+<td>NA</td>
+<td>The precinct number where the arrest occurred.</td>
+</tr>
+<tr class="odd">
+<td>11</td>
+<td>JURISDICTION_CODE</td>
+<td>Integer</td>
+<td>NA</td>
+<td>Code representing the jurisdiction under which the arrest was made.</td>
+</tr>
+<tr class="even">
+<td>12</td>
+<td>AGE_GROUP</td>
+<td>String</td>
+<td>NA</td>
+<td>Age group of the individual arrested (e.g., &lt;18, 18-24, 25-34, etc.).</td>
+</tr>
+<tr class="odd">
+<td>13</td>
+<td>PERP_SEX</td>
+<td>String</td>
+<td>NA</td>
+<td>The sex of the individual arrested (Male, Female).</td>
+</tr>
+<tr class="even">
+<td>14</td>
+<td>PERP_RACE</td>
+<td>String</td>
+<td>NA</td>
+<td>The race of the individual arrested (e.g., Black, White, Asian).</td>
+</tr>
+<tr class="odd">
+<td>15</td>
+<td>X_COORD_CD</td>
+<td>Integer</td>
+<td>NA</td>
+<td>X-coordinate of the arrest location (for mapping purposes).</td>
+</tr>
+<tr class="even">
+<td>16</td>
+<td>Y_COORD_CD</td>
+<td>Integer</td>
+<td>NA</td>
+<td>Y-coordinate of the arrest location (for mapping purposes).</td>
+</tr>
+<tr class="odd">
+<td>17</td>
+<td>Latitude</td>
+<td>Float</td>
+<td>Decimal Degrees</td>
+<td>Geographic latitude coordinate of the arrest location.</td>
+</tr>
+<tr class="even">
+<td>18</td>
+<td>Longitude</td>
+<td>Float</td>
+<td>Decimal Degrees</td>
+<td>Geographic longitude coordinate of the arrest location.</td>
+</tr>
+<tr class="odd">
+<td>19</td>
+<td>New.Georeferenced.Column</td>
+<td>String</td>
+<td>NA</td>
+<td>Georeferenced column for mapping purposes.</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="data-pre-processing" class="level2">
+<h2 class="anchored" data-anchor-id="data-pre-processing">Data Pre-Processing</h2>
+<p>The raw NYPD Arrest dataset was cleaned to ensure accuracy and reliability for analysis. Initially, the dataset was loaded, and its structure was assessed, revealing null values and duplicate rows. Rows with missing values were removed using na.omit(), and duplicates were eliminated with the distinct() function. The ARREST_DATE column was standardized to a consistent Date format (YYYY-MM-DD) using as.Date(), and rows with invalid dates were filtered out. These steps ensured the dataset was free of inconsistencies and ready for analysis. The cleaned dataset was saved in two versions: one with missing values and duplicates removed, and another with a standardized date column, ensuring the original data remained intact.</p>
+</section>
+<section id="research-questions" class="level2">
+<h2 class="anchored" data-anchor-id="research-questions">Research Questions</h2>
+<ul>
+<li><p>What are the spatial patterns of arrests across the boroughs of New York City?</p></li>
+<li><p>Where are the highest concentrations of arrests in NYC, and how do these vary by offense type?</p></li>
+<li><p>How do arrest demographics (age, race, gender) vary by offense type?</p></li>
+</ul>
+</section>
+<section id="spatial-patterns-of-arrests-across-the-boroughs-of-new-york-city" class="level2">
+<h2 class="anchored" data-anchor-id="spatial-patterns-of-arrests-across-the-boroughs-of-new-york-city">Spatial Patterns of arrests across the boroughs of New York City</h2>
+<p>This question aims to explore how arrest activity is distributed geographically across NYC’s five boroughs. It seeks to identify areas with higher or lower arrest counts, revealing potential disparities in law enforcement activity. Understanding these spatial variations provides a foundation for informed decision-making, such as resource allocation, community engagement strategies, and addressing systemic inequalities in policing.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="WhatsApp Image 2024-12-10 at 7.29.39 PM.jpeg" class="img-fluid figure-img"></p>
+<figcaption>image1</figcaption>
+</figure>
+</div>
+<p><strong>Methodology</strong>: The methodology involves using two datasets: arrest data containing borough codes (ARREST_BORO) and a shapefile with geospatial information for NYC borough boundaries. The borough codes in the arrest data were mapped to full borough names (e.g., Bronx, Brooklyn) to align with the shapefile’s boro_name field. After removing missing values, arrest counts were aggregated by borough using the group_by() and summarise() functions in the dplyr package. The aggregated arrest data was then merged with the shapefile based on borough names, combining geospatial and statistical information. This data was visualized using a choropleth map, a thematic map where boroughs are color-coded based on arrest counts, with darker shades indicating higher arrest activity. Borough names were labeled for clarity, providing an intuitive representation of the spatial distribution of arrests and highlighting geographic disparities in law enforcement activity across NewYork City.</p>
+<p><strong>Interpretation:</strong> The map reveals spatial disparities in arrest activity across the city, with arrests concentrated more heavily in Brooklyn and less so in Staten Island.This choropleth map visualizes the spatial distribution of arrests across the five boroughs of New York City. The boroughs are color-coded based on the total number of arrests, with darker shades indicating higher arrest counts and lighter shades indicating lower counts. Here are the key insights:</p>
+<ul>
+<li><p>Brooklyn has the darkest shade of blue, indicating it has the highest number of arrests among all boroughs. This could be attributed to its larger population, higher density, or specific law enforcement practices.</p></li>
+<li><p>Queens, Bronx, and Manhattan boroughs have moderate arrest counts, represented by medium shades of blue. While they don’t match Brooklyn’s arrest activity, they show a significant number of arrests relative to Staten Island.</p></li>
+<li><p>Staten Island has the lightest shade of blue, reflecting the lowest number of arrests. This aligns with its smaller population size and lower urban density compared to the other boroughs.</p></li>
+</ul>
+</section>
+<section id="highest-concentrations-of-arrests-in-nyc-and-variation-by-offense-type" class="level2">
+<h2 class="anchored" data-anchor-id="highest-concentrations-of-arrests-in-nyc-and-variation-by-offense-type">Highest Concentrations of Arrests in NYC and Variation by Offense Type</h2>
+<p>The aim is to identify areas in NYC with the highest concentrations of arrests and analyze how these vary by offense type, such as theft, assault, or drug-related crimes. This helps uncover spatial crime patterns, understand localized trends, and inform law enforcement strategies and resource allocation.</p>
+<p><strong>Methadology</strong> The methodology for analyzing and visualizing arrest patterns in New York City involved several steps to ensure accurate insights and effective visual representation. First, the dataset was imported and cleaned by filtering out missing or inconsistent values, particularly in the Latitude and Longitude columns, and ensuring the data types were consistent for geospatial and categorical analysis. The arrests were categorized into legal categories—Felony (F), Misdemeanor (M), and Violation (V)—using the LAW_CAT_CD column. For spatial analysis, an interactive map was created using the leaflet package, which visualized arrests across NYC boroughs. Different colors were used to represent the legal categories, and clustering highlighted high-intensity areas of arrests.</p>
+<p>The dataset was further grouped by offense types (OFNS_DESC) to identify the top 10 offenses by the number of arrests. A bar chart was generated using plotly to present this data interactively. Borough-specific arrest patterns were analyzed by grouping the data by borough, offense type, and legal category. This was visualized using a horizontal bar chart to show the distribution of top offenses by borough.</p>
+<p>For predictive modeling, Random Forest and Logistic Regression models were trained to predict the legal category of an arrest using features such as latitude, longitude, offense description, borough, and demographic details like age group, perpetrator sex, and race. The dataset was split into training and testing subsets, and the models were evaluated based on their predictive accuracy. Feature importance from the Random Forest model was visualized to identify the most significant factors influencing arrests.</p>
+<p>For predictive modeling, Random Forest and Logistic Regression models were trained to predict the legal category of an arrest using features such as latitude, longitude, offense description, borough, and demographic details like age group, perpetrator sex, and race. The dataset was split into training and testing subsets, and the models were evaluated based on their predictive accuracy. Feature importance from the Random Forest model was visualized to identify the most significant factors influencing arrests.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="WhatsApp Image 2024-12-10 at 11.50.05 PM.jpeg" class="img-fluid figure-img"></p>
+<figcaption>image</figcaption>
+</figure>
+</div>
+<p><strong>Interpretation:</strong> In this graph, a map of arrest concentrations by offense type, highlights where arrests are most concentrated in New York City. It shows that high concentrations are found in busy areas like Manhattan and Brooklyn. Felonies are often clustered in specific hotspots, while misdemeanors and violations are more evenly spread across the boroughs.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="WhatsApp Image 2024-12-10 at 11.50.37 PM.jpeg" class="img-fluid figure-img"></p>
+<figcaption>image2</figcaption>
+</figure>
+</div>
+<p><strong>Interpretation:</strong> A bar chart showing the top 10 offenses, reveals that “Assault 3 &amp; Related Offenses” is the most frequent crime, followed by “Petit Larceny” and “Felony Assault.” This indicates that crimes related to assault and theft are the primary drivers of arrests across NYC.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="WhatsApp Image 2024-12-10 at 11.56.58 PM.jpeg" class="img-fluid figure-img"></p>
+<figcaption>image3</figcaption>
+</figure>
+</div>
+<p><strong>Interpretation:</strong> This graph shows the importance of features in predicting arrest categories using a Random Forest model. Offense Description (OFNS_DESC) is the most critical factor, followed by geographic features like Latitude and Longitude, highlighting the importance of crime type and location. Demographic features like Perpetrator Race, Age Group, and Perpetrator Sex also contribute but are less significant, with the borough of arrest having the least influence. This emphasizes that crime type and location are key drivers in understanding arrest patterns.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="WhatsApp Image 2024-12-10 at 11.55.00 PM.jpeg" class="img-fluid figure-img"></p>
+<figcaption>image4</figcaption>
+</figure>
+</div>
+<p><strong>Interpretation:</strong> The accuracy comparison between logistic regression and random forest models demonstrates that logistic regression achieves higher accuracy in predicting arrest likelihood.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="WhatsApp Image 2024-12-10 at 11.53.11 PM.jpeg" class="img-fluid figure-img"></p>
+<figcaption>image5</figcaption>
+</figure>
+</div>
+<p><strong>Interpretation:</strong> This table highlights the top arrest concentrations in New York City, showing that Assault 3 &amp; Related Offenses is the most frequent crime across all boroughs, especially in Brooklyn, Manhattan, Queens, and the Bronx. Petit Larceny is prevalent in Manhattan, Brooklyn, and Queens, reflecting high commercial activity. Felony Assault is concentrated in the Bronx and Brooklyn, indicating higher rates of severe crimes in these areas. Traffic violations and drug-related offenses are also significant in Brooklyn and the Bronx. These patterns reveal borough-specific crime dynamics, with the Bronx and Brooklyn facing more serious offenses, while Manhattan and Queens see more theft-related crimes, offering insights for targeted law enforcement.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="WhatsApp Image 2024-12-10 at 11.51.33 PM.jpeg" class="img-fluid figure-img"></p>
+<figcaption>image6</figcaption>
+</figure>
+</div>
+<p><strong>Interpretation:</strong> This chart highlights the top 10 arrest offenses in NYC by borough. Assault 3 &amp; Related Offenses dominate across boroughs, with Brooklyn and the Bronx showing the highest counts. Petit Larceny is most frequent in Manhattan, reflecting its commercial activity, while Felony Assault is concentrated in the Bronx and Brooklyn, indicating a higher prevalence of violent crimes. Miscellaneous Penal Law violations are notable in Brooklyn and Manhattan, showing borough-specific enforcement patterns.</p>
+</section>
+<section id="demographic-trends-in-arrests-by-offense-type" class="level2">
+<h2 class="anchored" data-anchor-id="demographic-trends-in-arrests-by-offense-type">Demographic Trends in Arrests by Offense Type</h2>
+<p>The research question, “How do arrest demographics (age, race, gender) vary by offense type?”, seeks to explore the relationship between demographic characteristics of individuals (age, race, gender) and the types of offenses for which they are arrested. so we used The logistic regression analysis to specifically quantify the relationships between arrest demographics (age, race, gender) and the likelihood of arrests for a particular offense type, in this case, ASSAULT 3 &amp; RELATED OFFENSES.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="WhatsApp Image 2024-12-10 at 11.28.17 PM.jpeg" class="img-fluid figure-img"></p>
+<figcaption>image7</figcaption>
+</figure>
+</div>
+<p><strong>Methodology:</strong> The methodology involves using logistic regression to analyze how demographics influence arrests for the offense type “ASSAULT 3 &amp; RELATED OFFENSES.” A binary variable (OFFENSE_BINARY) was created to classify arrests for this offense versus all others. The predictors include AGE_GROUP, which examines the influence of age on arrest likelihood, PERP_RACE, which evaluates the impact of racial identity, and PERP_SEX, which analyzes gender differences. The logistic regression model quantifies how these variables affect the odds of arrest, with positive coefficients indicating increased odds and negative coefficients indicating decreased odds. Predicted probabilities (test_data$predictions) were generated to evaluate arrest likelihoods across demographic profiles in the test set, providing actionable insights into how age, race, and gender correlate with arrests.</p>
+<p><strong>Interpretation:</strong> The visualization highlights how arrest demographics, specifically age, race, and gender, vary across five major offense types: ASSAULT 3 &amp; RELATED OFFENSES, DANGEROUS DRUGS, FELONY ASSAULT, MISCELLANEOUS PENAL LAW, and PETIT LARCENY. Each panel shows arrest trends across age groups (&lt;18, 18-24, 25-34, etc.) for different racial groups, separated by gender. Arrest rates peak in the 18-24 and 55+ age groups for offenses like ASSAULT 3 and FELONY ASSAULT, particularly among Black and White Hispanic individuals. Gender disparities are evident, with males showing significantly higher arrest counts across all offenses. Certain racial groups, such as Asian / Pacific Islander and American Indian/Alaskan Native, have consistently lower arrest rates, while Black individuals dominate arrests in most violent crimes. The trends reveal clear demographic disparities, emphasizing the intersection of age, race, and gender in influencing arrest patterns across different offenses.</p>
+</section>
+<section id="limitations" class="level2">
+<h2 class="anchored" data-anchor-id="limitations">Limitations</h2>
+<p>1.Temporal Scope: The analysis focuses on data from a specific time period, which may not capture long-term trends or seasonal variations in crime patterns and arrests.</p>
+<p>2.Model Dependence: Predictive models like Random Forest and Logistic Regression rely on the features available in the dataset. Additional variables, such as economic conditions or law enforcement policies, could enhance the accuracy and depth of the analysis.</p>
+<p>3.Borough-Specific Dynamics: The insights are generalized across boroughs, but unique neighborhood-level dynamics within each borough may not be fully explored in this study.</p>
+<p>4.Human Factors: Arrest data may reflect enforcement practices or policies that could influence patterns, such as targeted patrols or specific crime prevention strategies, which are not directly analyzed in the project.</p>
+</section>
+<section id="key-findings" class="level2">
+<h2 class="anchored" data-anchor-id="key-findings">Key Findings</h2>
+<p>1.Spatial Trends: Arrests are concentrated in densely populated and commercial areas like Manhattan and Brooklyn, with borough-specific variations in crime types.</p>
+<p>2.Frequent Offenses: “Assault 3 &amp; Related Offenses” and “Petit Larceny” are the most common crimes, reflecting trends in minor assaults and theft.</p>
+<p>3.Demographic Patterns: Arrest demographics show disparities, with males and individuals from certain racial groups being more frequently arrested for violent crimes.</p>
+<p>4.Predictive Insights: Offense type and location are the most critical predictors of arrest categories, highlighting the spatial and categorical nature of arrests.</p>
+<p>5.Law Enforcement Priorities: Patterns in arrests for specific offenses, such as traffic violations and drug-related crimes, reflect borough-specific enforcement strategies.</p>
+</section>
+<section id="how-this-project-and-visualization-can-help-the-nypd" class="level2">
+<h2 class="anchored" data-anchor-id="how-this-project-and-visualization-can-help-the-nypd">How This Project and Visualization Can Help the NYPD</h2>
+<p>Targeted Resource Allocation: The spatial visualizations identify arrest hotspots and borough-specific trends, enabling the NYPD to allocate resources more effectively to areas with higher crime concentrations, such as Brooklyn for felony assaults or Manhattan for petty theft.</p>
+<p>Crime Prevention Strategies: By highlighting the most common offenses, such as “Assault 3 &amp; Related Offenses” and “Petit Larceny,” the project helps the NYPD focus on preventive measures, such as community outreach, surveillance, or targeted patrols in high-risk areas.</p>
+<p>Data-Driven Decision Making: Predictive modeling and feature importance analysis provide actionable insights into key factors driving arrests, such as offense type and location, helping the NYPD design more informed policies and strategies for crime reduction and equitable enforcement.</p>
+</section>
+<section id="conclusion" class="level2">
+<h2 class="anchored" data-anchor-id="conclusion">Conclusion</h2>
+<p>This project depicts a thorough examination of arrest statistics in New York City, highlighting significant trends linked to geography, demographics, and offenses. Because of its commercial activity, Manhattan has higher rates of minor thefts, while Brooklyn and the Bronx are hotspots for major crimes like felony assault. Males and members of specific racial groups are disproportionately arrested for violent offenses, according to the demographic research, which reveals glaring inequalities. The significance of crime type and geographic location in comprehending arrest dynamics is further highlighted by predictive modeling. These findings provide important insights to guide data-driven law enforcement tactics and equitable public safety policies, notwithstanding limits in data quality and scope.</p>
+</section>
+<section id="references" class="level2">
+<h2 class="anchored" data-anchor-id="references">References</h2>
+<p>1.Data Source: Dataset used in this analysis was sourced from Data.gov, a platform offering public access to machine-readable datasets generated by the Federal Government.</p>
+<p>2.R Libraries and Tools: Leaflet for Spatial Visualization: Documentation: https://rstudio.github.io/leaflet/</p>
+<p>3.tmap for Thematic Mapping: Documentation: https://cran.r-project.org/web/packages/tmap/vignettes/tmap-getstarted.html</p>
+<p>4.RandomForest for Predictive Analysis: Documentation: https://cran.r-project.org/web/packages/randomForest/randomForest.pdf</p>
+<p>5.Plotly for Interactive Charts: Documentation: https://plotly.com/r/</p>
+<p>6.Geospatial Analysis: Geo-spatial tools were implemented using the sf package. Documentation: https://r-spatial.github.io/sf/</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

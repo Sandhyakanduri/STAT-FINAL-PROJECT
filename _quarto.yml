@@ -1,0 +1,26 @@
+project:
+  type: website
+  output-dir: docs
+
+website:
+  title: "STAT Final Project"
+  navbar:
+    left:
+      - text: "Home"
+        href: index.qmd
+      - text: "Code"
+        href: about.qmd
+      - text: "Contact"
+        href: contact.qmd
+    right:
+      - icon: github
+        href: https://github.com/your-repo-name
+
+format:
+  html:
+    theme: cosmo
+    css: styles.css
+    toc: true
+    toc-location: left
+
+
