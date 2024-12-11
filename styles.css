@@ -1,0 +1,167 @@
+/* css styles */
+/* General body styling */
+body {
+  font-family: "Arial", sans-serif;
+  line-height: 1.6;
+  margin: 0;
+  padding: 0;
+  background-color: #fdfdfd; /* Soft white for background */
+  color: #4a4a4a; /* Subtle gray text */
+  text-align: center; /* Align content to the center */
+}
+
+/* Navbar styling */
+.navbar {
+  background-color: #e3f2fd; /* Light blue for a soft look */
+  padding: 15px;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  display: flex;
+  justify-content: center; /* Center navbar items */
+  gap: 20px; /* Spacing between links */
+}
+
+.navbar a {
+  color: #007acc; /* Light blue for links */
+  text-decoration: none;
+  font-size: 1.1em;
+  font-weight: bold;
+}
+
+.navbar a:hover {
+  color: #005f99; /* Slightly darker blue on hover */
+}
+
+/* Header styling */
+header {
+  padding: 30px;
+  background-color: #f1f8ff; /* Soft pastel blue */
+  color: #003f5c; /* Dark blue for contrast */
+  margin-bottom: 20px;
+}
+
+header h1 {
+  font-size: 2.5em;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+header p {
+  font-size: 1.2em;
+  color: #666666; /* Muted gray for secondary text */
+}
+
+/* Main content area */
+main {
+  padding: 20px;
+  background-color: #ffffff; /* Pure white for content */
+  border-radius: 10px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  max-width: 900px; /* Limit content width for readability */
+  margin: 0 auto 30px; /* Center main content */
+  text-align: left; /* Align text to the left for better readability */
+}
+
+h2, h3 {
+  color: #005f99; /* Medium blue for headings */
+  text-align: center; /* Center-align headings */
+}
+
+h2 {
+  font-size: 2em;
+  margin-bottom: 15px;
+}
+
+h3 {
+  font-size: 1.5em;
+  margin-bottom: 12px;
+}
+
+/* Footer styling */
+footer {
+  text-align: center;
+  padding: 15px;
+  background-color: #f8f9fa; /* Light gray */
+  color: #666666;
+  font-size: 0.9em;
+  margin-top: 20px;
+}
+
+/* Button styling */
+.btn {
+  display: inline-block;
+  padding: 12px 18px;
+  background-color: #007acc; /* Soft blue */
+  color: #ffffff;
+  border-radius: 5px;
+  text-decoration: none;
+  font-weight: bold;
+  margin-top: 20px;
+  transition: background-color 0.3s ease;
+}
+
+.btn:hover {
+  background-color: #005f99; /* Darker blue on hover */
+}
+
+/* Table styling */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 20px 0;
+  border-radius: 5px; /* Rounded table corners */
+  overflow: hidden;
+  box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  text-align: center; /* Center-align table text */
+}
+
+th, td {
+  border: 1px solid #ddd;
+  padding: 10px;
+}
+
+th {
+  background-color: #e3f2fd; /* Light blue for table headers */
+  color: #003f5c; /* Dark blue for text */
+  font-weight: bold;
+}
+
+td {
+  background-color: #ffffff;
+  color: #4a4a4a;
+}
+
+tr:nth-child(even) td {
+  background-color: #f9f9f9; /* Very light gray for alternate rows */
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .navbar {
+    flex-direction: column; /* Stack navbar items vertically on smaller screens */
+    gap: 10px;
+  }
+
+  header h1 {
+    font-size: 2em;
+  }
+
+  header p {
+    font-size: 1em;
+  }
+
+  main {
+    padding: 15px;
+    max-width: 100%; /* Remove width restriction for small screens */
+  }
+}
+
+/* Additional enhancements for links */
+a {
+  color: #007acc;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+  color: #005f99;
+}
